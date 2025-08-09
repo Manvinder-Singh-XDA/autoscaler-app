@@ -1,0 +1,27 @@
+base_url: "http://localhost:8123"
+
+probe_port: 8081  # single port used for both healthz and readyz
+
+logging:
+  level: DEBUG
+
+cpu_threshold: 0.8
+scale_up_step: 1
+scale_down_step: 1
+poll_interval: 5
+probe_port: 8081
+
+tasks:
+  - name: auto_scaler_get_status
+    request:
+      method: GET
+      endpoint: "/app/status"
+      headers:
+        Accept: "application/json"
+
+  - name: auto_scaler_update_replicas
+    request:
+      method: PUT
+      endpoint: "/app/replicas"
+      headers:
+        Content-Type: "application/json"
