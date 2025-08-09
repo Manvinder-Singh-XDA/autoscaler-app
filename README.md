@@ -38,10 +38,33 @@ Example `config.yaml`:
 
 ```yaml
 base_url: "http://localhost:8123"
-scale_up_threshold: 80
-scale_down_threshold: 20
-min_instances: 1
-max_instances: 10
+
+probe_port: 8081  # single port used for both healthz and readyz
+
+logging:
+  level: DEBUG
+
+cpu_threshold: 0.8
+scale_up_step: 1
+scale_down_step: 1
+poll_interval: 5
+probe_port: 8081
+
+tasks:
+  - name: auto_scaler_get_status
+    request:
+      method: GET
+      endpoint: "/app/status"
+      headers:
+        Accept: "application/json"
+
+  - name: auto_scaler_update_replicas
+    request:
+      method: PUT
+      endpoint: "/app/replicas"
+      headers:
+        Content-Type: "application/json"
+
 ```
 
 You can also pass a custom config file path:
