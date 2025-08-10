@@ -3,7 +3,7 @@ base_url: "http://localhost:8123"
 probe_port: 8081  # single port used for both healthz and readyz
 
 logging:
-  level: DEBUG
+  level: INFO
 
 cpu_threshold: 0.8
 scale_up_step: 1

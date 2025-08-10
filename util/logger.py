@@ -4,8 +4,10 @@ from logging.handlers import TimedRotatingFileHandler
 from datetime import datetime,timezone
 
 def setup_logger(log_name="autoscaler", log_level=logging.INFO, log_format=None):
+
     """
     Sets up a rotating logger that saves logs to 'logs/' with daily rotation.
+    
     """
     if log_format is None:
         log_format = "%(asctime)s - %(levelname)s - %(message)s"
